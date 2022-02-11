@@ -29,11 +29,12 @@ const corsOps = {
   origin: "http://localhost:3000"
 };
 
-const reqEndpoint = "http://api.wordnik.com/v4/words.json/randomWord";
-const reqApiKey = `?api_key=${process.env.WORDNIK_KEY}`
+const reqEndpoint = "http://api.wordnik.com/v4/words.json/randomWords";
+const corpusCount = 11000
+const reqParams = `?hasDictionaryDef=true&includePartOfSpeech=adjective%2Cverb%2Cadverb&excludePartOfSpeech=given-name%2Cnoun%2Cproper-noun%2Cfamily-name%2Cnoun-plural%2Cabbreviation&minCorpusCount=${corpusCount}&maxCorpusCount=-1&minDictionaryCount=1&maxDictionaryCount=-1&minLength=5&maxLength=5&limit=10&api_key=`
 
 app.get('/apiv1', cors(corsOps), async (req, res) => {
-  const response = await fetch(reqEndpoint + reqApiKey, {
+  const response = await fetch(reqEndpoint + reqParams + process.env.WORDNIK_KEY, {
     method: 'GET',      
     Headers: {
       // Authorization: 'api_key ' + process.env.WORDNIK_KEY,
