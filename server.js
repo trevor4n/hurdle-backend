@@ -1,8 +1,14 @@
 // Imports
 const express = require('express');
 const cors = require('cors');
-const fetch = require('node-fetch');
-require('dotenv').config();
+
+// Load .env if there is one (Node's built-in replacement for dotenv). Variables already
+// set in the environment win, as with dotenv. fetch is also built into Node now.
+try {
+  process.loadEnvFile();
+} catch (err) {
+  if (err.code !== 'ENOENT') throw err;
+}
 
 // ICEBOX: mern_review api router paths controllers
 
